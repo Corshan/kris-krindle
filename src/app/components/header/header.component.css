@@ -1,0 +1,22 @@
+header {
+  background: #ff5252;
+  margin-top: 0;
+  padding: 1rem;
+  align-items: center;
+  box-shadow: var(--tui-shadow-medium-hover);
+}
+
+h1 {
+  /*text-align: center;*/
+  color: white;
+  margin: auto 1rem;
+  text-wrap: nowrap;
+}
+
+div {
+  margin: auto;
+  width: min-content;
+  text-align: center;
+  display: flex;
+  /*border: 3px solid green;*/
+}
