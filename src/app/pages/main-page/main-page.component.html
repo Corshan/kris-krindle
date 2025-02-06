@@ -1,1 +1,33 @@
-<p>main-page works!</p>
+<main
+  tuiCardLarge
+  tuiAppearance="floating"
+>
+  <div tuiHeader>
+    <h2 tuiTitle>Add the names</h2>
+  </div>
+  <div>
+    <form [formGroup]="namesForm">
+      <tui-input formControlName="name">
+        Type a name!
+        <input
+          tuiTextfieldLegacy
+          type="text"
+        />
+      </tui-input>
+    </form>
+    <div id="button-group">
+      <button tuiButton type="button" size="m" class="button-add">
+        <tui-icon
+          badge=""
+          icon="@tui.plus"
+        />
+      </button>
+      <button tuiButton type="button" size="m" class="button-minus">
+        <tui-icon
+          badge=""
+          icon="@tui.minus"
+        />
+      </button>
+    </div>
+  </div>
+</main>
