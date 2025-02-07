@@ -3,7 +3,7 @@ import {TuiAppearance, TuiButton, TuiIcon, TuiTitle} from '@taiga-ui/core';
 import {TuiCardLarge, TuiHeader} from '@taiga-ui/layout';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {TuiInputModule} from '@taiga-ui/legacy';
-import {TuiButtonGroup, TuiIconBadge} from '@taiga-ui/kit';
+import {TuiIconBadge} from '@taiga-ui/kit';
 
 @Component({
   selector: 'app-main-page',
@@ -16,8 +16,7 @@ import {TuiButtonGroup, TuiIconBadge} from '@taiga-ui/kit';
     TuiInputModule,
     TuiButton,
     TuiIcon,
-    TuiIconBadge,
-    TuiButtonGroup
+    TuiIconBadge
   ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css'
