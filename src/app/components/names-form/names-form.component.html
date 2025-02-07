@@ -1,1 +1,40 @@
-<p>names-form works!</p>
+<div>
+  <form [formGroup]="namesForm">
+    <div formArrayName="nameId" class="input-group">
+      <div *ngFor="let n of getNames().controls; let i=index" [formGroupName]="i">
+        <tui-input formControlName="name">
+          Type a name!
+          <input
+            tuiTextfieldLegacy
+            type="text"
+          />
+        </tui-input>
+      </div>
+    </div>
+  </form>
+  <div id="button-group">
+    <button
+      (click)="addNameInput()"
+      class="button-add"
+      size="m"
+      tuiButton
+      type="button"
+    >
+      <tui-icon
+        badge=""
+        icon="@tui.plus"
+      />
+    </button>
+    <button
+      (click)="removeNameInput()"
+      class="button-minus"
+      size="m"
+      tuiButton
+      type="button">
+      <tui-icon
+        badge=""
+        icon="@tui.minus"
+      />
+    </button>
+  </div>
+</div>
