@@ -27,22 +27,14 @@ import {AsyncPipe, NgForOf} from '@angular/common';
   ],
 })
 export class NamesFormComponent {
-  protected readonly namesForm;
+  protected readonly namesForm: FormGroup;
 
-  constructor(
-    private formBuilder: FormBuilder,
-  ) {
+  constructor() {
     this.namesForm = new FormGroup({
       names: new FormArray(
         [new FormControl('', [Validators.required])],
       ),
     });
-  }
-
-  newName(): FormGroup {
-    return this.formBuilder.group({
-      name: '',
-    }, {validators: [Validators.required]});
   }
 
   getNames(): FormArray {

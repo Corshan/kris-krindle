@@ -2,6 +2,7 @@
   <form [formGroup]="namesForm">
     <div class="input-group">
       <div *ngFor="let n of getNames().controls; let i=index" formArrayName="names">
+        <label>Name {{i+1}}</label>
         <tui-input formControlName="{{i}}">
           Type a name!
           <input
