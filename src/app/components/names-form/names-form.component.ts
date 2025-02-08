@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {Component} from '@angular/core';
+import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {TuiInputModule} from '@taiga-ui/legacy';
-import {TuiButton, TuiIcon} from '@taiga-ui/core';
-import {TuiIconBadge} from '@taiga-ui/kit';
-import {NgForOf} from '@angular/common';
+import {TuiButton, TuiError, TuiIcon} from '@taiga-ui/core';
+import {TuiFieldErrorPipe, TuiIconBadge, tuiValidationErrorsProvider} from '@taiga-ui/kit';
+import {AsyncPipe, NgForOf} from '@angular/common';
 
 @Component({
   selector: 'app-names-form',
@@ -14,9 +14,17 @@ import {NgForOf} from '@angular/common';
     TuiIcon,
     TuiIconBadge,
     NgForOf,
+    TuiError,
+    TuiFieldErrorPipe,
+    AsyncPipe,
   ],
   templateUrl: './names-form.component.html',
-  styleUrl: './names-form.component.css'
+  styleUrl: './names-form.component.css',
+  providers: [
+    tuiValidationErrorsProvider({
+      required: 'Opps, you forgot a name!!',
+    }),
+  ],
 })
 export class NamesFormComponent {
   protected readonly namesForm;
@@ -24,26 +32,31 @@ export class NamesFormComponent {
   constructor(
     private formBuilder: FormBuilder,
   ) {
-    this.namesForm = this.formBuilder.group({
-      nameId: this.formBuilder.array([this.newName()])
+    this.namesForm = new FormGroup({
+      names: new FormArray(
+        [new FormControl('', [Validators.required])],
+      ),
     });
   }
 
   newName(): FormGroup {
     return this.formBuilder.group({
       name: '',
-    })
+    }, {validators: [Validators.required]});
   }
 
   getNames(): FormArray {
-  return this.namesForm.get('nameId') as FormArray;
+    return this.namesForm.get('names') as FormArray;
   }
 
-  addNameInput(){
-    this.getNames().push(this.newName());
+  addNameInput() {
+    this.getNames().push(new FormControl('', [Validators.required]));
   }
 
-  removeNameInput(){
-    if(this.getNames().length != 1) this.getNames().removeAt(-1);
+  removeNameInput() {
+    if (this.getNames().length == 1) {
+      this.getNames().removeAt(-1);
+      this.addNameInput();
+    } else this.getNames().removeAt(-1);
   }
 }

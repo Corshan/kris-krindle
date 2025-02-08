@@ -1,14 +1,18 @@
 <div>
   <form [formGroup]="namesForm">
-    <div formArrayName="nameId" class="input-group">
-      <div *ngFor="let n of getNames().controls; let i=index" [formGroupName]="i">
-        <tui-input formControlName="name">
+    <div class="input-group">
+      <div *ngFor="let n of getNames().controls; let i=index" formArrayName="names">
+        <tui-input formControlName="{{i}}">
           Type a name!
           <input
             tuiTextfieldLegacy
             type="text"
           />
         </tui-input>
+        <tui-error
+          formControlName="{{i}}"
+          [error]="[] | tuiFieldError | async"
+        />
       </div>
     </div>
   </form>
