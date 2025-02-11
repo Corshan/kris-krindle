@@ -5,21 +5,23 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {TuiInputModule} from '@taiga-ui/legacy';
 import {TuiIconBadge} from '@taiga-ui/kit';
 import {NamesFormComponent} from "../../components/names-form/names-form.component";
+import {GifteesCardComponent} from '../../components/giftees-card/giftees-card.component';
 
 @Component({
   selector: 'app-main-page',
-    imports: [
-        TuiCardLarge,
-        TuiAppearance,
-        TuiHeader,
-        TuiTitle,
-        ReactiveFormsModule,
-        TuiInputModule,
-        TuiButton,
-        TuiIcon,
-        TuiIconBadge,
-        NamesFormComponent
-    ],
+  imports: [
+    TuiCardLarge,
+    TuiAppearance,
+    TuiHeader,
+    TuiTitle,
+    ReactiveFormsModule,
+    TuiInputModule,
+    TuiButton,
+    TuiIcon,
+    TuiIconBadge,
+    NamesFormComponent,
+    GifteesCardComponent
+  ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css'
 })
