@@ -1,9 +1,10 @@
-import {Component} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Component, output, Output} from '@angular/core';
+import {FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {TuiInputModule} from '@taiga-ui/legacy';
-import {TuiButton, TuiError, TuiIcon} from '@taiga-ui/core';
+import {TuiAppearance, TuiButton, TuiError, TuiIcon, TuiTitle} from '@taiga-ui/core';
 import {TuiFieldErrorPipe, TuiIconBadge, tuiValidationErrorsProvider} from '@taiga-ui/kit';
 import {AsyncPipe, NgForOf} from '@angular/common';
+import {TuiCardLarge, TuiHeader} from '@taiga-ui/layout';
 
 @Component({
   selector: 'app-names-form',
@@ -17,6 +18,10 @@ import {AsyncPipe, NgForOf} from '@angular/common';
     TuiError,
     TuiFieldErrorPipe,
     AsyncPipe,
+    TuiAppearance,
+    TuiCardLarge,
+    TuiHeader,
+    TuiTitle,
   ],
   templateUrl: './names-form.component.html',
   styleUrl: './names-form.component.css',
@@ -28,6 +33,7 @@ import {AsyncPipe, NgForOf} from '@angular/common';
 })
 export class NamesFormComponent {
   protected readonly namesForm: FormGroup;
+  names = output<string[]>();
 
   constructor() {
     this.namesForm = new FormGroup({
@@ -50,5 +56,12 @@ export class NamesFormComponent {
       this.getNames().removeAt(-1);
       this.addNameInput();
     } else this.getNames().removeAt(-1);
+  }
+
+  onSubmit() {
+    this.names.emit(
+      this.getNames().getRawValue() as string[]
+    );
+    console.log(this.getNames().getRawValue());
   }
 }

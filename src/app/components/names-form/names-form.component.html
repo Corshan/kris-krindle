@@ -1,8 +1,14 @@
-<div>
+<main
+  tuiCardLarge
+  tuiAppearance="floating"
+>
+  <div tuiHeader>
+    <h2 tuiTitle>Add the names</h2>
+  </div>
   <form [formGroup]="namesForm">
     <div class="input-group">
       <div *ngFor="let n of getNames().controls; let i=index" formArrayName="names">
-        <label>Name {{i+1}}</label>
+        <label>Name {{ i + 1 }}</label>
         <tui-input formControlName="{{i}}">
           Type a name!
           <input
@@ -17,29 +23,39 @@
       </div>
     </div>
   </form>
-  <div id="button-group">
+  <div class="buttons">
+    <div id="button-group">
+      <button
+        (click)="addNameInput()"
+        class="button-add"
+        size="m"
+        tuiButton
+        type="button"
+      >
+        <tui-icon
+          badge=""
+          icon="@tui.plus"
+        />
+      </button>
+      <button
+        (click)="removeNameInput()"
+        class="button-minus"
+        size="m"
+        tuiButton
+        type="button">
+        <tui-icon
+          badge=""
+          icon="@tui.minus"
+        />
+      </button>
+    </div>
     <button
-      (click)="addNameInput()"
-      class="button-add"
       size="m"
       tuiButton
       type="button"
+      (click)="onSubmit()"
     >
-      <tui-icon
-        badge=""
-        icon="@tui.plus"
-      />
-    </button>
-    <button
-      (click)="removeNameInput()"
-      class="button-minus"
-      size="m"
-      tuiButton
-      type="button">
-      <tui-icon
-        badge=""
-        icon="@tui.minus"
-      />
+      Generate!
     </button>
   </div>
-</div>
+</main>
