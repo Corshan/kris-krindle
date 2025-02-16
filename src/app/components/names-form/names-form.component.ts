@@ -62,6 +62,6 @@ export class NamesFormComponent {
     this.names.emit(
       this.getNames().getRawValue() as string[]
     );
-    console.log(this.getNames().getRawValue());
+    // console.log(this.getNames().getRawValue());
   }
 }

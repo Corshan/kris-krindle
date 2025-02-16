@@ -26,5 +26,9 @@ import {GifteesCardComponent} from '../../components/giftees-card/giftees-card.c
   styleUrl: './main-page.component.css'
 })
 export class MainPageComponent {
+  protected names: string[] = [];
 
+  onNamesChanged(names: string[]) {
+    this.names = names;
+  }
 }

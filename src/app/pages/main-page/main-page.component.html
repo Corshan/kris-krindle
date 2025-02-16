@@ -1,4 +1,4 @@
 <main>
- <app-names-form class="inline"></app-names-form>
-  <app-giftees-card class="inline"></app-giftees-card>
+ <app-names-form class="inline" (names)="onNamesChanged($event)"></app-names-form>
+  <app-giftees-card class="inline" [names]="names"></app-giftees-card>
 </main>

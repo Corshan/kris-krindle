@@ -1,1 +1,12 @@
-<p>giftees-card works!</p>
+<main
+  tuiCardLarge
+  tuiAppearance="floating"
+>
+  <div tuiHeader>
+    <h2 tuiTitle>Who has who!!</h2>
+  </div>
+
+  <div *ngFor="let name of krisKindle">
+    {{name.gifter}} has {{name.giftee}}!!
+  </div>
+</main>
