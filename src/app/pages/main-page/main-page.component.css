@@ -3,12 +3,12 @@ main{
   height: 85vh;
   display: flex;
   /*flex-direction: row;*/
-  border: 2px solid blueviolet;
+  /*border: 2px solid blueviolet;*/
 }
 
 .inline{
   /*display: inline-block;*/
   flex: 1;
-  border: 2px solid blueviolet;
+  /*border: 2px solid blueviolet;*/
   margin: 1rem;
 }

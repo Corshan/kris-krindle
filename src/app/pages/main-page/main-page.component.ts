@@ -10,15 +10,8 @@ import {GifteesCardComponent} from '../../components/giftees-card/giftees-card.c
 @Component({
   selector: 'app-main-page',
   imports: [
-    TuiCardLarge,
-    TuiAppearance,
-    TuiHeader,
-    TuiTitle,
     ReactiveFormsModule,
     TuiInputModule,
-    TuiButton,
-    TuiIcon,
-    TuiIconBadge,
     NamesFormComponent,
     GifteesCardComponent
   ],
