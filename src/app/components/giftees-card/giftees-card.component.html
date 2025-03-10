@@ -1,12 +1,15 @@
-<main
+<div
   tuiCardLarge
   tuiAppearance="floating"
+  class="main"
 >
-  <div tuiHeader>
+  <div tuiHeader class="header">
     <h2 tuiTitle>Who has who!!</h2>
   </div>
 
+  <div class="main">
   <div *ngFor="let name of krisKindle">
-    {{name.gifter}} has {{name.giftee}}!!
+    <span>{{name.gifter}}</span> has <span>{{name.giftee}}</span>!!
   </div>
-</main>
+  </div>
+</div>

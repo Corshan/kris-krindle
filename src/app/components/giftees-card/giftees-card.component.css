@@ -1,3 +1,7 @@
-main{
+.main{
   height: 100%;
+}
+
+span{
+  font-weight: bold;
 }

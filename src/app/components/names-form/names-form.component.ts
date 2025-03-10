@@ -59,6 +59,7 @@ export class NamesFormComponent {
   }
 
   onSubmit() {
+    if(this.getNames().getRawValue().some(item => item === "")) return;
     this.names.emit(
       this.getNames().getRawValue() as string[]
     );
