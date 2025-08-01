@@ -19,10 +19,14 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 
+type KrisKrindle = {
+  giftee: string,
+  gifter: string
+}
+
 export default function Home() {
-  const [inputFields, setInputFields] = useState([
-    { name: "" },
-  ]);
+  const [inputFields, setInputFields] = useState([{ name: "" }]);
+  const [results, setResults] = useState<KrisKrindle[]>([]);
 
   const handleInput = (
     idx: number,
@@ -37,7 +41,7 @@ export default function Home() {
 
   const addField = () => {
     let data = [...inputFields];
-    data.push({name: ''});
+    data.push({ name: "" });
     setInputFields(data);
   };
 
@@ -47,6 +51,26 @@ export default function Home() {
     let data = [...inputFields];
     data.pop();
     setInputFields(data);
+  };
+
+  const generateKrisKrindle = () => {
+    let data = [...inputFields];
+
+    if (data.length <= 2) return;
+
+    const shuffledData = data
+      .map((a) => ({ sort: Math.random(), value: a }))
+      .sort((a, b) => a.sort - b.sort)
+      .map((a) => a.value.name);
+
+    const pairings = shuffledData.map((a, idx) => {
+      return {
+        gifter: a,
+        giftee: shuffledData[(idx + 1) % shuffledData.length],
+      };
+    });
+
+    setResults(pairings);
   };
 
   return (
@@ -82,7 +106,16 @@ export default function Home() {
         <Card>
           <CardHeader title="Add the names" />
           <CardContent>
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 2, height: '20em', overflowY: 'auto', padding: 2 }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 2,
+                height: "20em",
+                overflowY: "auto",
+                padding: 2,
+              }}
+            >
               {inputFields.map((value, idx) => {
                 return (
                   <TextField
@@ -97,20 +130,35 @@ export default function Home() {
               })}
             </Box>
           </CardContent>
-          <CardActions sx={{justifyContent: 'space-between', padding: 2}}>
-            <Box sx={{display: 'flex', gap: 1}}>
-              <Fab size="small" aria-label="add" color="success" onClick={addField}>
+          <CardActions sx={{ justifyContent: "space-between", padding: 2 }}>
+            <Box sx={{ display: "flex", gap: 1 }}>
+              <Fab
+                size="small"
+                aria-label="add"
+                color="success"
+                onClick={addField}
+              >
                 <AddIcon />
               </Fab>
-              <Fab size="small" aria-label="remove" color="error" onClick={removeField}>
+              <Fab
+                size="small"
+                aria-label="remove"
+                color="error"
+                onClick={removeField}
+              >
                 <RemoveIcon />
               </Fab>
             </Box>
-            <Button variant="contained">Generate</Button>
+            <Button variant="contained" onClick={generateKrisKrindle}>Generate</Button>
           </CardActions>
         </Card>
         <Card>
           <CardHeader title="Who has Who!!" />
+          <CardContent>
+            {results.map((value, idx) => {
+              return <Typography>{value.gifter} has {value.giftee}</Typography>;
+            })}
+          </CardContent>
         </Card>
       </Box>
     </>
