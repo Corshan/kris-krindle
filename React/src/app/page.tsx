@@ -13,6 +13,12 @@ import {
   Toolbar,
   Typography,
   Fab,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  TableContainer,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -20,9 +26,9 @@ import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 
 type KrisKrindle = {
-  giftee: string,
-  gifter: string
-}
+  giftee: string;
+  gifter: string;
+};
 
 export default function Home() {
   const [inputFields, setInputFields] = useState([{ name: "" }]);
@@ -57,6 +63,8 @@ export default function Home() {
     let data = [...inputFields];
 
     if (data.length <= 2) return;
+
+    if (data.some((a) => a.name.length === 0)) return;
 
     const shuffledData = data
       .map((a) => ({ sort: Math.random(), value: a }))
@@ -117,13 +125,16 @@ export default function Home() {
               }}
             >
               {inputFields.map((value, idx) => {
+                const hasError = value.name.length === 0;
                 return (
                   <TextField
                     id="outlined-basic"
+                    error={hasError}
                     key={idx}
                     label={"Name " + (idx + 1)}
                     value={value.name}
                     variant="outlined"
+                    helperText={hasError ? "Required" : ""}
                     onChange={(e) => handleInput(idx, e)}
                   />
                 );
@@ -149,15 +160,50 @@ export default function Home() {
                 <RemoveIcon />
               </Fab>
             </Box>
-            <Button variant="contained" onClick={generateKrisKrindle}>Generate</Button>
+            <Button variant="contained" onClick={generateKrisKrindle}>
+              Generate
+            </Button>
           </CardActions>
         </Card>
         <Card>
           <CardHeader title="Who has Who!!" />
           <CardContent>
-            {results.map((value, idx) => {
-              return <Typography>{value.gifter} has {value.giftee}</Typography>;
-            })}
+            <TableContainer sx={{maxHeight: '20em'}}>
+              <Table stickyHeader>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>
+                      <Typography
+                        variant="h6"
+                        component="h2"
+                        sx={{ fontWeight: "bold" }}
+                      >
+                        Gifter
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography
+                        variant="h6"
+                        component="h2"
+                        sx={{ fontWeight: "bold" }}
+                      >
+                        Giftee
+                      </Typography>
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {results.map((value) => {
+                    return (
+                      <TableRow>
+                        <TableCell>{value.gifter}</TableCell>
+                        <TableCell>{value.giftee}</TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </CardContent>
         </Card>
       </Box>
